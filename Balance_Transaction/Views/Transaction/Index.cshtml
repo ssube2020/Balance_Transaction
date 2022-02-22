@@ -10,11 +10,11 @@
 
     @foreach(var pers in Model)
     {
-        <form class="d-grid" asp-action="SubtractMoney" asp-controller="People" method="post">
+        <form class="d-grid" asp-action="SubtractMoney" asp-controller="Transaction" method="post">
         <div class="card mt-4" style="background-color: darkgoldenrod; width: fit-content;">
-            <h5 class="text-black"> @pers.Name  </h5>    
-            <h5 class="text-black"> @pers.Surname </h5>    
-            <h4 class="text-white"> ბალანსი: <strong class="text-black"> @pers.Balance$ </strong>  </h4>    
+            <h3 class="text-white"> @pers.Name  </h3>    
+            <h3 class="text-white"> @pers.Surname </h3>    
+            <h3 class="text-white d-flex"> ბალანსი:    <strong class="text-black">  <h2> @pers.Balance$ </h2>  </strong>  </h3>    
             <div class="d-flex"> 
                <input class="text-white" type="submit" style="background-color: #0f5233;" value="თანხის გადარიცხვა:">
                <input type="text" name="totransac" value=" ">
@@ -22,39 +22,19 @@
             </div>
         </div>
         </form>
-        <form class="d-grid" asp-action="AddMoney" asp-controller="People" method="post">
+        <form class="d-grid" asp-action="AddMoney" asp-controller="Transaction" method="post">
             <div class="d-flex mt-1"> 
                    <input class="text-white" type="submit" style="background-color: #0f5233;" value="ბალანსის შევსება:">
                    <input type="text" name="tofill" value=" ">
                    <input type="hidden" name="persid" value="@pers.Id">
             </div>
          </form>
-         <form class="d-grid" asp-action="TransHistory" asp-controller="People" method="post">
+         <form class="d-grid" asp-action="TransHistory" asp-controller="Transaction" method="post">
             <div class="d-flex mt-1"> 
                    <input class="text-red" type="submit" style="background-color: brown;" value="ტრანზაქციების ისტორია">
                    <input type="hidden" name="persid" value="@pers.Id">
             </div>
          </form>
     }
-
-
-    @*<div class="d-flex"> 
-               <input type="submit" style="background-color: #0f5233;" value="გადარიცხვა:">
-               <input type="text" name="totransac" value="15">
-               <input type="hidden" name="personid" value="30">
-    </div>*@
-
-
-    @*<p> @Model.Name </p>
-    <p> გადასარიცხი თანხა: </p>
-    <input type="text" placeholder="Amount"/> *@
-
-
-<div>
-
-    @*<h2>  მიმდინარე ბალანსი  </h2>
-    <strong> @Model.Balance </strong>*@
-
-</div>
 
 
