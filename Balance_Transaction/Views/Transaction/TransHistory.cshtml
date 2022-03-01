@@ -1,5 +1,9 @@
 ﻿@model IEnumerable<Balance_Transaction.Models.Transaction>;
 
+@section Styles {
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.css">
+}
+
 
 <div class="page-content page-container" id="page-content">
     <div class="padding">
@@ -10,7 +14,7 @@
                         <h4 class="card-title"> ტრანზაქციების ისტორია: @ViewBag.person.Name  @ViewBag.person.Surname </h4>
                         <div class="table-responsive">
 
-                            <table class="table table-hover">
+                            <table id="example" class="table table-hover">
                                 <thead>
                                     <tr>
                                         <th> ტიპი </th>
@@ -21,17 +25,26 @@
                                 <tbody>
                                         @foreach (var item in @ViewBag.data ) {
 
-                                            <tr>
-                                                <td> @item.TransactionType </td>
-                                                <td>  @item.Date  </td>   
-                                                @if(@item.TransactionType == "გადარიცხვა")
+                                        <tr>
+                                            <td> 
+                                                @if (@item.TransactionType == "ჩარიცხვა")
                                                 {
-                                                <td class="text-danger" style="font-weight: 700;">  -@item.Amount$ </td>
+                                                    <p class="text-success"> @item.TransactionType </p>
+                                                } else
+                                                {
+                                                    <p class="text-danger"> @item.TransactionType </p>
+                                                }
+                                            </td>
+                                            <td>  @item.Date  </td>
+                                            @if(@item.TransactionType == "ჩარიცხვა")
+                                            {
+                                                <td> <p class="text-success" style="font-weight:700;">  +@item.Amount </p>  </td>
                                             } else
                                             {
-                                               <td class="text-danger" style="font-weight: 700;">  +@item.Amount$ </td> 
+                                                <td> <p class="text-danger" style="font-weight:700;">  -@item.Amount </p>  </td>
                                             }
-                                            </tr>
+
+                                         </tr>
 
                                         }
                                 </tbody>
@@ -42,4 +55,29 @@
             </div>
         </div>
     </div>
-</div>
+</div
+
+
+@section Scripts{
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.js"></script>
+<script>
+
+    $(document).ready(function() {
+
+        $("#example").DataTable();
+
+    });
+
+</script>
+
+
+}
+
+
+
+
+
+
+
+
+

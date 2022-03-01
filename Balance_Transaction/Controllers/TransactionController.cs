@@ -18,32 +18,44 @@ namespace Balance_Transaction.Controllers
             return View(_db.Persons.ToList());
         }
 
+
+
+        public static object aa = new object();
+            
+        
         [HttpPost]
         public IActionResult SubtractMoney(int personid, double totransac)
         {
-            //Todo Get balance
-            //Check Balance
-            //if balance > amount than make transaction
-            var person = _db.Persons.Where(k=>k.Id == personid).FirstOrDefault();
-            if (person != null)
+
+
+
+            lock (aa)
             {
-                if ((person.Balance >= totransac) && totransac > 0)
+                //Todo Get balance
+                //Check Balance
+                //if balance > amount than make transaction
+                var person = _db.Persons.Where(k => k.Id == personid).FirstOrDefault();
+                if (person != null)
                 {
-                    person.Balance -= totransac;
-                    Transaction tran = new();
-                    tran.Date = DateTime.Now;
-                    tran.PersonId = personid;
-                    tran.TransactionType = "გადარიცხვა";
-                    tran.Amount = totransac;
-                    _db.Transactions.Add(tran);
-                    _db.SaveChanges();
-                } else if((totransac == 0) || String.IsNullOrEmpty(totransac.ToString()))
-                {
-                    TempData["nulloerror"] = " 0 თეთრის გადარიცხვა შეუძლებელია ";
-                }
-                else
-                {
-                    TempData["BalanceError"] = "ანგარიშზე არარის საკმარისი თანხა";
+                    if ((person.Balance >= totransac) && totransac > 0)
+                    {
+                        person.Balance -= totransac;
+                        Transaction tran = new();
+                        tran.Date = DateTime.Now;
+                        tran.PersonId = personid;
+                        tran.TransactionType = "გადარიცხვა";
+                        tran.Amount = totransac;
+                        _db.Transactions.Add(tran);
+                        _db.SaveChanges();
+                    }
+                    else if ((totransac == 0) || String.IsNullOrEmpty(totransac.ToString()))
+                    {
+                        TempData["nulloerror"] = " 0 თეთრის გადარიცხვა შეუძლებელია ";
+                    }
+                    else
+                    {
+                        TempData["BalanceError"] = "ანგარიშზე არარის საკმარისი თანხა";
+                    }
                 }
             }
             return RedirectToAction("Index", "Transaction");
