@@ -6,7 +6,9 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddDbContext<AppDbContext>(opts => opts.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=test1;Integrated Security=True;"));
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews(); 
+builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
+
 
 var app = builder.Build();
 
@@ -19,6 +21,7 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
 app.UseStaticFiles();
 
 app.UseRouting();
@@ -30,3 +33,7 @@ app.MapControllerRoute(
     pattern: "{controller=Transaction}/{action=Index}/{id?}");
 
 app.Run();
+
+
+
+

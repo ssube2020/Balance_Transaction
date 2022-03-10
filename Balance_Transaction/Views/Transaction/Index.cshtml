@@ -1,31 +1,33 @@
 ﻿@model IEnumerable<Balance_Transaction.Models.Person>;
 
+    <h5 class=" text-danger " >
+        @TempData["BalanceError"] 
+        @TempData["nulloerror"]
+        <h5 class="text-success text-bold"> @TempData["success"] </h5> 
+    </h5>
 
     <h3> მომხმარებლები </h3>
 
-    <h3 class=" text-danger " >
-        @TempData["BalanceError"] 
-        @TempData["nulloerror"]
-    </h3>
-
     @foreach(var pers in Model)
     {
-        <form class="d-grid" asp-action="SubtractMoney" asp-controller="Transaction" method="post">
-        <div class="card mt-4" style="background-color: darkgoldenrod; width: fit-content;">
+        <div class="d-grid">
+        <div class="card mt-4" style="background-color: darkgoldenrod; width: 60%;">
             <h3 class="text-white"> @pers.Name  </h3>    
             <h3 class="text-white"> @pers.Surname </h3>    
-            <h3 class="text-white d-flex"> ბალანსი:    <strong class="text-black">  <h2> @pers.Balance$ </h2>  </strong>  </h3>    
-            <div class="d-flex"> 
-               <input class="text-white" type="submit" style="background-color: #0f5233;" value="თანხის გადარიცხვა:">
-               <input type="text" name="totransac" value=" ">
-               <input type="hidden" name="personid" value="@pers.Id">
+            <h3 class="text-white d-flex"> ბალანსი: <strong style="margin-left: 20px;" class="text-black">  <h2> @pers.Balance$ </h2>  </strong>  </h3>    
+            <div class="d-flex">           
+               <input id="myBtn" class="myBtn text-white" data-toggle="modal" data-target="#myModal"  data-personId="@pers.Id" type="submit" style="background-color: #0f5233;" value="თანხის გადარიცხვა:">
+               @*<input type="text" name="totransac" value=" ">*@
+               <input type="hidden" name="personid"  class="personID" id="personID" value="@pers.Id">
+               <input type="hidden" name="personname" class="nameID" id="nameID" value="@pers.Name" />
+               <input type="hidden" name="personname" class="surnameID" id="surnameID" value="@pers.Surname " />
             </div>
         </div>
-        </form>
+        </div>
         <form class="d-grid" asp-action="AddMoney" asp-controller="Transaction" method="post">
             <div class="d-flex mt-1"> 
                    <input class="text-white" type="submit" style="background-color: #0f5233;" value="ბალანსის შევსება:">
-                   <input type="text" name="tofill" value=" ">
+                   @*<input type="text" name="tofill" value=" ">*@
                    <input type="hidden" name="persid" value="@pers.Id">
             </div>
          </form>
@@ -37,4 +39,76 @@
          </form>
     }
 
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <form class="modal-content" asp-action="SubtractMoney" asp-controller="Transaction" method="post">
+            <div class="modal-header">
+                <h5 class="modal-title" id="myModalLabel"> თანხის გადარიცხვა </h5>
+                 <button id="cls-btn" 
+                        style="color: red; border-radius: 8px; background-color: white;
+                        font-size: medium; border-color: black; padding-top: 0px; font-weight: 900; border-width: 0px; font-size: x-large;" 
+                        type="button" class="close-btn" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                 </button>
+            </div>
+            <div class="card" style="border-width: thin; margin: 10px;">
+                <div class="modal-body d-flex">
+                   <h6 class="text-black"> გამგზავნი: </h6>
+                   <h6 style="border: none; margin-top: 1px; margin-left: 6%; color: green; font-family: unset; font-weight: bold;" type="text" id="TransId" class="text-green">  </h6>
+                </div>
+
+                <div class="modal-body d-flex">
+                   <h6 class="text-black"> მიმღების პნ: </h6>
+                   <input id="RecId" style="margin-left: 3%; height: 28px; width: 180px;" type="text" name="receiverPN" value=" " placeholder="პირადი ნომერი">
+                   
+               </div>
+
+               <div class="modal-body d-flex">
+                   <h6 class="text-black"> რაოდენობა: </h6>   
+                   <input id="TransId" style="margin-left: 4.5%; height: 28px; width: 180px;" type="text" name="totransac" value=" ">
+               </div>
+            </div>
+
+            <div class="modal-footer">   
+                <button type="submit" class="btn btn-primary"> გადარიცხვა </button>
+                <button type="button" class="btn close-btn btn-danger data-dismiss="modal"> დახურვა </button>
+                <input name="personid" id="totrans" type="hidden"/>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+
+ <script>
+            $(document).ready(function() {
+                
+                 // Attach Button click event listener 
+                $(".myBtn").click( function(e){
+                     
+                     // show Modal
+                     $("#myModal").modal('show');
+                     var nameValue = document.getElementById("nameID").value;
+                     var surnameValue = document.getElementById("surnameID").value;
+                     //var persid = document.getElementById("personID").value;
+                     let personId = $(this).attr("data-personId");
+
+                     //alert(persid);
+
+                     document.getElementById("TransId").innerText = nameValue + " " + surnameValue;
+                     document.getElementById("totrans").value = personId;
+                     //document.getElementById("RecId").value = nameValue;
+                });
+
+                $(".close-btn").click( function(){
+
+                     // hide Modal
+                     $("#myModal").modal('hide');
+                });
+
+            });
+    </script>
+
+}
 

@@ -10,6 +10,7 @@ namespace Balance_Transaction.Models
         [Required]
         public double Balance { get; set; }
         public DateTime Date { get; set; }
+        public string PrivateNo { get; set; }
 
         public Person()
         {
