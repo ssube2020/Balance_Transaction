@@ -53,7 +53,7 @@ namespace Balance_Transaction.Controllers
                                 tran.Amount = totransac;
                                 _db.Transactions.Add(tran);
                                 _db.SaveChanges();
-                                TempData["success"] = " ტრანზაქცია წარმატებულია ";
+                                TempData["success"] = " თანხა გადაირიცხა წარმატებით ";
                             }
                             else
                             {
@@ -101,7 +101,7 @@ namespace Balance_Transaction.Controllers
                     tran.Amount = tofill;
                     _db.Transactions.Add(tran);
                     _db.SaveChanges();
-
+                    TempData["fill"] = "ჩაგერიცხათ " + tofill + " ლარი";
                 }
             }
             return RedirectToAction("Index", "Transaction");
