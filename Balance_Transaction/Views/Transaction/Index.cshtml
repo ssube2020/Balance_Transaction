@@ -15,16 +15,16 @@
             <div class="card mt-4 crd-stls" style="background-color: darkgoldenrod; width: 60%; padding: 20px">
 
                 <div class="card" style="background-color: #664d03;">
-                    <h3 class="text-white"> @pers.Name  </h3>
-                    <h3 class="text-white"> @pers.Surname </h3>
-                    <h3 class="text-white d-flex"> ბალანსი: <strong style="margin-left: 20px;" class="text-black">  <h2> @pers.Balance$ </h2>  </strong>  </h3>
+                    <h3 class="text-white" style="margin-left:5px;"> @pers.Name  </h3>
+                    <h3 class="text-white" style="margin-left:5px;"> @pers.Surname </h3>
+                    <h3 class="text-white d-flex" style="margin-left:5px;"> ბალანსი: <strong style="margin-left: 20px;" class="text-black">  <h2> @pers.Balance$ </h2>  </strong>  </h3>
                 </div>
 
                 <div class="d-flex">           
                    <input id="myBtn" class="myBtn text-white mutual-btn" data-toggle="modal" data-target="#myModal" data-name = "@pers.Name" data-surname = "@pers.Surname" data-personId="@pers.Id" type="submit" value="თანხის გადარიცხვა">
                    <input type="hidden" name="personid" class="personID" id="personID" value="@pers.Id">
-                   <input type="hidden" name="personname" class="nameID" id="nameID" value="@pers.Name" />
-                   <input type="hidden" name="personname" class="surnameID" id="surnameID" value="@pers.Surname " />
+                   <input type="hidden" name="personname"  class="nameID" id="nameID" value="@pers.Name" />
+                   <input type="hidden" name="personname"  class="surnameID" id="surnameID" value="@pers.Surname " />
                 </div>
 
                 <div class="d-flex mt-1"> 
@@ -116,7 +116,7 @@
         </div>
     </div>
 
-    @section Scripts {
+@*    @section Scripts {
 
          <script>
                     $(document).ready(function() {
@@ -154,5 +154,5 @@
                     });
             </script>
 
-    }
+    }*@
 

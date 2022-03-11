@@ -31,9 +31,34 @@ body {
     text-align: inherit;
 }
 
-/*.crd-stls {
-    background-color: #664d03;
-    width: 35%;
-    height: 250px;
-    padding-top: 15px;
-}*/
+.crd-stls {
+    border-radius: 15px;
+}
+
+@media screen and (max-width: 470px) {
+
+    .crd-stls {
+        width: 100% !important;
+    }
+
+
+}
+
+@media screen and (max-width: 290px) {
+
+    .mutual-btn {
+        width: 97% !important;
+    }
+}
+
+@media screen and (max-width: 260px) {
+
+    .mutual-btn {
+        margin-left: -13px;
+    }
+
+    .card {
+        margin-left: -12px !important;
+    }
+}
+
