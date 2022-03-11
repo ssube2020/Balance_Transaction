@@ -16,3 +16,24 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+#myBtn {
+    margin-top: 20px;
+    text-align: inherit;
+    background-color: #171818;
+}
+
+
+.mutual-btn {
+    height: 40px;
+    width: 222px;
+    border-radius: 10px;
+    text-align: inherit;
+}
+
+/*.crd-stls {
+    background-color: #664d03;
+    width: 35%;
+    height: 250px;
+    padding-top: 15px;
+}*/

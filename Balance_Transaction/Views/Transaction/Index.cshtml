@@ -12,25 +12,29 @@
     @foreach(var pers in Model)
     {
         <div class="d-grid">
-            <div class="card mt-4" style="background-color: darkgoldenrod; width: 60%;">
-                <h3 class="text-white"> @pers.Name  </h3>    
-                <h3 class="text-white"> @pers.Surname </h3>    
-                <h3 class="text-white d-flex"> ბალანსი: <strong style="margin-left: 20px;" class="text-black">  <h2> @pers.Balance$ </h2>  </strong>  </h3>    
+            <div class="card mt-4 crd-stls" style="background-color: darkgoldenrod; width: 60%; padding: 20px">
+
+                <div class="card" style="background-color: #664d03;">
+                    <h3 class="text-white"> @pers.Name  </h3>
+                    <h3 class="text-white"> @pers.Surname </h3>
+                    <h3 class="text-white d-flex"> ბალანსი: <strong style="margin-left: 20px;" class="text-black">  <h2> @pers.Balance$ </h2>  </strong>  </h3>
+                </div>
+
                 <div class="d-flex">           
-                   <input id="myBtn" class="myBtn text-white" data-toggle="modal" data-target="#myModal" data-name = "@pers.Name" data-surname = "@pers.Surname" data-personId="@pers.Id" type="submit" style="background-color: #0f5233;" value="თანხის გადარიცხვა:">
+                   <input id="myBtn" class="myBtn text-white mutual-btn" data-toggle="modal" data-target="#myModal" data-name = "@pers.Name" data-surname = "@pers.Surname" data-personId="@pers.Id" type="submit" value="თანხის გადარიცხვა">
                    <input type="hidden" name="personid" class="personID" id="personID" value="@pers.Id">
                    <input type="hidden" name="personname" class="nameID" id="nameID" value="@pers.Name" />
                    <input type="hidden" name="personname" class="surnameID" id="surnameID" value="@pers.Surname " />
                 </div>
 
                 <div class="d-flex mt-1"> 
-                   <input class="fill-btn text-white" type="submit" style="background-color: #0f5233;" data-name = "@pers.Name" data-surname = "@pers.Surname" data-personId="@pers.Id" value="ბალანსის შევსება:">
+                   <input class="fill-btn text-white mt-3 mutual-btn" type="submit" style="background-color: #0f5233;" data-name = "@pers.Name" data-surname = "@pers.Surname" data-personId="@pers.Id" value="ბალანსის შევსება">
                    <input type="hidden" name="persid" value="@pers.Id">
                 </div>
 
                 <form class="d-grid" asp-action="TransHistory" asp-controller="Transaction" method="post">
                     <div class="d-flex mt-1"> 
-                       <input class="text-red" type="submit" style="background-color: brown;" value="ტრანზაქციების ისტორია">
+                       <input class="text-white mt-3 tran-hist mutual-btn" type="submit" style="background-color: brown;" value="ტრანზაქციების ისტორია">
                        <input type="hidden" name="persid" value="@pers.Id">
                     </div>
                 </form>
@@ -63,7 +67,7 @@
 
                     <div class="modal-body d-flex">
                        <h6 class="text-black"> მიმღების პნ: </h6>
-                       <input id="RecId" style="margin-left: 3%; height: 28px; width: 180px; border-radius: 7px;" type="text" name="receiverPN" placeholder="პირადი ნომერი">
+                       <input id="RecId" style="margin-left: 3%; height: 28px; width: 180px; border-radius: 7px;" type="text" name="receiverPN" placeholder="   პირადი ნომერი">
                    
                    </div>
 
@@ -97,8 +101,8 @@
                 <div class="card" style="border-width: thin; margin: 10px;">
                 
                     <div class="modal-body d-flex" style="height: 170px; padding-top: 60px;">
-                       <h6 class="text-black" style="font-size: 21px; margin-top: 5px"> თანხა: </h6>
-                       <input id="1" style="margin-left: 3%; height: 40px; width: 140px; border-radius: 12px;" type="text" name="tofill" value=" ">
+                       <h6 class="text-black" style="font-size: 21px; margin-top: 3px"> თანხა: </h6>
+                       <input id="1" style="margin-left: 3%; height: 35px; width: 140px; border-radius: 12px;" type="text" name="tofill" value=" ">
                        <input type="hidden" name="persid" id="tofill" value = " " />
                    </div>
 
